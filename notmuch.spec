@@ -1,16 +1,18 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
+%global commit_id ec02089
+
 Name: notmuch
-Version: 0.16
-Release: 8%{?dist}
+Version: 0.18
+Release: 8%{?dist}.git%{commit_id}
 Summary: System for indexing, searching, and tagging email
 Group: Applications/Internet
 License: GPLv3+
 URL: http://notmuchmail.org/
-Source0: http://notmuchmail.org/releases/notmuch-%{version}.tar.gz
+Source0: notmuch-%{version}-%{commit_id}.tar.gz
 BuildRequires: xapian-core-devel gmime-devel libtalloc-devel
 BuildRequires: zlib-devel emacs-el emacs-nox perl python2-devel
-BuildRequires: perl-podlators
+BuildRequires: python-sphinx
 
 %description
 Fast system for indexing, searching, and tagging email.  Even if you
@@ -70,7 +72,7 @@ notmuch-mutt provide integration among the Mutt mail user agent and
 the Notmuch mail indexer.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{commit_id}
 
 %build
 # The %%configure macro cannot be used because notmuch doesn't support
@@ -91,6 +93,7 @@ pushd contrib/notmuch-mutt
 popd
 
 %install
+install -m 755 -d %{buildroot}%{_mandir}/man1
 make install DESTDIR=%{buildroot}
 
 # Enable dynamic library stripping.
@@ -116,6 +119,7 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 %{_bindir}/notmuch
 %{_mandir}/man1/notmuch.1*
 %{_mandir}/man1/notmuch-config.1*
+%{_mandir}/man1/notmuch-compact.1*
 %{_mandir}/man1/notmuch-count.1*
 %{_mandir}/man1/notmuch-dump.1*
 %{_mandir}/man1/notmuch-insert.1*
@@ -148,6 +152,9 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 %{_mandir}/man1/notmuch-mutt.1*
 
 %changelog
+* Sat May 17 2014 Lars Kellogg-Stedman <lars@redhat.com> - 0.16-8
+- Updated to notmuch 0.18-ec02089
+
 * Fri Sep 27 2013 Lars Kellogg-Stedman <lars@redhat.com> - 0.16-8
 - Updated to notmuch 0.16.
 
