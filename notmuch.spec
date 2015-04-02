@@ -1,10 +1,10 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
-%global commit_id ec02089
+%global commit_id bed8b67
 
 Name: notmuch
-Version: 0.18
-Release: 8%{?dist}.git%{commit_id}
+Version: 0.19
+Release: 1%{?dist}.git%{commit_id}
 Summary: System for indexing, searching, and tagging email
 Group: Applications/Internet
 License: GPLv3+
@@ -114,7 +114,7 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 
 %files
 %doc AUTHORS COPYING COPYING-GPL-3 INSTALL README
-%{_sysconfdir}/bash_completion.d/notmuch
+#%{_sysconfdir}/bash_completion.d/notmuch
 %{_datadir}/zsh/functions/Completion/Unix/_notmuch
 %{_bindir}/notmuch
 %{_mandir}/man1/notmuch.1*
@@ -132,7 +132,7 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 %{_mandir}/man1/notmuch-tag.1*
 %{_mandir}/man5/notmuch*.5*
 %{_mandir}/man7/notmuch*.7*
-%{_libdir}/libnotmuch.so.3*
+%{_libdir}/libnotmuch.so.*
 
 %files devel
 %{_libdir}/libnotmuch.so
