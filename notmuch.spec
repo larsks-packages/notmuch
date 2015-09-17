@@ -1,10 +1,10 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
-%global commit_id bed8b67
+%global commit_id d432116
 
 Name: notmuch
-Version: 0.19
-Release: 1%{?dist}.git%{commit_id}
+Version: 0.20
+Release: 2%{?dist}.git%{commit_id}
 Summary: System for indexing, searching, and tagging email
 Group: Applications/Internet
 License: GPLv3+
@@ -12,7 +12,7 @@ URL: http://notmuchmail.org/
 Source0: notmuch-%{version}-%{commit_id}.tar.gz
 BuildRequires: xapian-core-devel gmime-devel libtalloc-devel
 BuildRequires: zlib-devel emacs-el emacs-nox perl python2-devel
-BuildRequires: python-sphinx
+BuildRequires: python-sphinx bash-completion
 
 %description
 Fast system for indexing, searching, and tagging email.  Even if you
@@ -114,14 +114,16 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 
 %files
 %doc AUTHORS COPYING COPYING-GPL-3 INSTALL README
-#%{_sysconfdir}/bash_completion.d/notmuch
+%{_sysconfdir}/bash_completion.d/notmuch
 %{_datadir}/zsh/functions/Completion/Unix/_notmuch
 %{_bindir}/notmuch
 %{_mandir}/man1/notmuch.1*
-%{_mandir}/man1/notmuch-config.1*
+%{_mandir}/man1/notmuch-address.1*
 %{_mandir}/man1/notmuch-compact.1*
+%{_mandir}/man1/notmuch-config.1*
 %{_mandir}/man1/notmuch-count.1*
 %{_mandir}/man1/notmuch-dump.1*
+%{_mandir}/man1/notmuch-emacs-mua.1*
 %{_mandir}/man1/notmuch-insert.1*
 %{_mandir}/man1/notmuch-new.1*
 %{_mandir}/man1/notmuch-reply.1*
@@ -152,6 +154,9 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 %{_mandir}/man1/notmuch-mutt.1*
 
 %changelog
+* Wed Sep 16 2015 Lars Kellogg-Stedman <lars@redhat.com> - 0.20
+- updated to 0.20-d432116
+
 * Sat May 17 2014 Lars Kellogg-Stedman <lars@redhat.com> - 0.16-8
 - Updated to notmuch 0.18-ec02089
 
