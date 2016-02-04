@@ -1,9 +1,9 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
-%global commit_id d432116
+%global commit_id 1fcbf09
 
 Name: notmuch
-Version: 0.20
+Version: 0.21
 Release: 2%{?dist}.git%{commit_id}
 Summary: System for indexing, searching, and tagging email
 Group: Applications/Internet
@@ -154,6 +154,9 @@ install contrib/notmuch-mutt/notmuch-mutt.1 %{buildroot}%{_mandir}/man1/notmuch-
 %{_mandir}/man1/notmuch-mutt.1*
 
 %changelog
+* Thu Feb 04 2016 Lars Kellogg-Stedman <lars@redhat.com> - 0.21
+- updated to 0.21-1fcbf09
+
 * Wed Sep 16 2015 Lars Kellogg-Stedman <lars@redhat.com> - 0.20
 - updated to 0.20-d432116
 
